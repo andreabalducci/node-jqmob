@@ -39,7 +39,10 @@ app.get('/', routes.index);
 app.get('/api/album/list', function(req, res){
     provider.findAll(function(err, data){
         if(err) throw err;
-        res.json(data);
+
+        setTimeout(function(){
+            res.json(data);
+        }, 2000);
     });
 });
 

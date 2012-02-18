@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+    <title> Music store </title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- jQuery Mobile CSS bits -->
+    <link rel="stylesheet" href="css/jquery.mobile-1.0.1.min.css"/>
+
+    <!-- Custom css -->
+    <link rel="stylesheet" href="css/custom.css"/>
+
+    <!-- Javascript includes -->
+    <script src="js/jquery.js"></script>
+    <script src="js/mobileinit.js"></script>
+    <script src="js/jquery.mobile-1.0.1.min.js"></script>
+</head>
+<body id="page-body">
+<div data-role="page">
+
+    <div data-role="header">
+        <h1>Music store</h1>
+    </div>
+
+    <div data-role="content">
+
+        <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+            <li data-role="list-divider">Snippet Pages</li>
+            <li><a href="#" id="clickme">clickme</a></li>
+        </ul>
+    </div>
+
+    <div data-role="footer">
+        <p>TechBar.it</p>
+    </div>
+
+    <script>
+        $(function () {
+            $('#clickme').bind('click', function (event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                $.mobile.showPageLoadingMsg();
+
+                $.getJSON('/api/album/list', {}, function (data) {
+                    var $page = $("<div data-role='page' id='about'></div>");
+                    var $header = $("<div data-role='header'><h1>About</h1></div>");
+                    var $content = $("<div data-role='content'>hello</div>");
+                    var $footer = $("<div data-role='footer'>footer</div>");
+
+                    $.each(data, function(index, album){
+                        $content.append('<p>' + album.title +'</p>');
+                    });
+
+                    $page.append($header).append($content).append($footer).appendTo('#page-body');
+
+                    $.mobile.hidePageLoadingMsg();
+
+                    //initialize the new page
+                    $.mobile.initializePage();
+
+                    //navigate to the new page
+                    $.mobile.changePage("#about", "pop", false, true);
+                });
+            });
+        });
+    </script>
+</div>
+</body>
+</html>
