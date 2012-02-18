@@ -44,14 +44,15 @@
 
                 $.mobile.showPageLoadingMsg();
 
-                $.getJSON('/api/album/list', {}, function (data) {
+                $.getJSON('/api/album/list?callback=?', {}, function (data) {
                     var $page = $("<div data-role='page' id='about'></div>");
                     var $header = $("<div data-role='header'><h1>About</h1></div>");
-                    var $content = $("<div data-role='content'>hello</div>");
+                    var $content = $("<div data-role='content'></div>");
                     var $footer = $("<div data-role='footer'>footer</div>");
 
+                    var $list = $("<ul data-role='listview'></ul>").appendTo($content);
                     $.each(data, function(index, album){
-                        $content.append('<p>' + album.title +'</p>');
+                        $list.append("<li><a href='#'>" + album.title +"</a></li>");
                     });
 
                     $page.append($header).append($content).append($footer).appendTo('#page-body');
