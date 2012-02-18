@@ -36,14 +36,14 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 
-app.get('/album/list', function(req, res){
+app.get('/api/album/list', function(req, res){
     provider.findAll(function(err, data){
         if(err) throw err;
         res.json(data);
     });
 });
 
-app.get('/album/:id', function(req, res){
+app.get('/api/album/:id', function(req, res){
     provider.findById(req.params.id, function(err, album){
         if(err) throw err;
         res.json(album);

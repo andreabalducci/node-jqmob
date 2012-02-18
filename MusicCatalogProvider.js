@@ -1,16 +1,17 @@
 var albumCounter = 1;
 
-MusicCatalogProvider = function(){};
+MusicCatalogProvider = function () {
+};
 MusicCatalogProvider.prototype.inMemoryCatalog = [];
 
-MusicCatalogProvider.prototype.findAll = function(callback) {
-    callback( null, this.inMemoryCatalog )
+MusicCatalogProvider.prototype.findAll = function (callback) {
+    callback(null, this.inMemoryCatalog)
 };
 
-MusicCatalogProvider.prototype.findById = function(id, callback) {
+MusicCatalogProvider.prototype.findById = function (id, callback) {
     var result = null;
-    for(var i =0;i<this.inMemoryCatalog.length;i++) {
-        if( this.inMemoryCatalog[i]._id == id ) {
+    for (var i = 0; i < this.inMemoryCatalog.length; i++) {
+        if (this.inMemoryCatalog[i]._id == id) {
             result = this.inMemoryCatalog[i];
             break;
         }
@@ -18,33 +19,34 @@ MusicCatalogProvider.prototype.findById = function(id, callback) {
     callback(null, result);
 };
 
-MusicCatalogProvider.prototype.save = function(albums, callback) {
+MusicCatalogProvider.prototype.save = function (albums, callback) {
     var article = null;
 
-    if( typeof(albums.length)=="undefined")
+    if (typeof(albums.length) == "undefined")
         albums = [albums];
 
-    for( var i =0;i< albums.length;i++ ) {
+    for (var i = 0; i < albums.length; i++) {
         article = albums[i];
         article._id = albumCounter++;
 
-        if( article.tracks === undefined )
+        if (article.tracks === undefined)
             article.tracks = [];
 
-        this.inMemoryCatalog[this.inMemoryCatalog.length]= article;
+        this.inMemoryCatalog[this.inMemoryCatalog.length] = article;
     }
     callback(null, albums);
 };
 
 new MusicCatalogProvider().save([
-    {title: 'My first album', artist: 'My band',
+    {title:'The dark side of the moon', artist:'Pink floyd', cover:'1.jpg',
         tracks:[
-            {number: 1, title:'Track 1', lenght:'03:30'},
-            {number: 2, title:'Track 2', lenght:'03:45'}
+            {number:1, title:'Track 1', lenght:'03:30'},
+            {number:2, title:'Track 2', lenght:'03:45'}
         ]
     },
-    {title: 'My second album', artist: 'My brother'},
-    {title: 'Unreleased', artist: 'unknown'}
-], function(error, albums){});
+    {title:'My second album', artist:'My brother'},
+    {title:'Unreleased', artist:'unknown'}
+], function (error, albums) {
+});
 
 exports.MusicCatalogProvider = MusicCatalogProvider;
