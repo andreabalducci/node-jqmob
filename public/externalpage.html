@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <title> jQuery Mobile </title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- jQuery Mobile CSS bits -->
+    <link rel="stylesheet" href="app/css/jquery.mobile-1.0.1.min.css"/>
+
+    <!-- Javascript includes -->
+    <script src="app/js/jquery.js"></script>
+    <script src="app/js/jquery.mobile-1.0.1.min.js"></script>
+</head>
+<body id="page-body">
+<div data-role="page">
+    <div data-role="header">
+        <h1>Intro</h1>
+    </div>
+    <div data-role="content">
+        <p>External page</p>
+    </div>
+    <div data-role="footer" data-position="fixed" data-id="fixedFooter">
+        <div data-role="navbar" data-iconpos="bottom">
+            <ul>
+                <li><a href="#" data-icon="arrow-l">Prev</a></li>
+                <li><a href="#">external</a></li>
+                <li><a href="#slide-02" data-icon="arrow-r">Next</a></li>
+            </ul>
+        </div>
+        <!-- /navbar -->
+    </div>
+    <!-- /footer -->
+</div>
+</body>
+</html>
