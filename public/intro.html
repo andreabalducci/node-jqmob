@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <title> jQuery Mobile </title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- jQuery Mobile CSS bits -->
+    <link rel="stylesheet" href="app/css/jquery.mobile-1.0.1.min.css"/>
+
+    <!-- Javascript includes -->
+    <script src="app/js/jquery.js"></script>
+    <script src="app/js/jquery.mobile-1.0.1.min.js"></script>
+</head>
+<body id="page-body">
+<div data-role="page" id="slide-01">
+    <div data-role="header">
+        <h1>Intro</h1>
+    </div>
+    <div data-role="content">
+
+        <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+            <li data-role="list-divider">Snippet Pages</li>
+            <li ><a href='#slide-02'>Slide</a></li>
+        </ul>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar" data-iconpos="bottom">
+            <ul>
+                <li><a href="#" data-icon="arrow-l">Prev</a></li>
+                <li><a href="#">01</a></li>
+                <li><a href="#slide-02" data-icon="arrow-r">Next</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /footer -->
+</div>
+<div data-role="page" id="slide-02">
+    <div data-role="header" data-position="fixed">
+        <h1>slide 2</h1>
+    </div>
+    <div data-role="content">
+
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar" data-iconpos="bottom">
+            <ul>
+                <li><a href="#slide-01" data-direction="reverse" data-icon="arrow-l">Prev</a></li>
+                <li><a href="#">01</a></li>
+                <li><a href="#" data-icon="arrow-r">Next</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /footer -->
+
+</div>
+</body>
+</html>
