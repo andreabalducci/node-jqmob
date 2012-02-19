@@ -22,11 +22,11 @@
     <div data-role="content">
 
         <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
-            <li data-role="list-divider">Snippet Pages</li>
-            <li ><a href='#slide-02'>Slide</a></li>
+            <li data-role="list-divider">Todo list</li>
+            <li ><a href='#slide-02'>inizio</a></li>
         </ul>
     </div>
-    <div data-role="footer" data-position="fixed">
+    <div data-role="footer" data-position="fixed" data-id="fixedFooter">
         <div data-role="navbar" data-iconpos="bottom">
             <ul>
                 <li><a href="#" data-icon="arrow-l">Prev</a></li>
@@ -44,16 +44,40 @@
     <div data-role="content">
 
     </div>
-    <div data-role="footer" data-position="fixed">
+    <div data-role="footer" data-position="fixed" data-id="fixedFooter">
         <div data-role="navbar" data-iconpos="bottom">
             <ul>
                 <li><a href="#slide-01" data-direction="reverse" data-icon="arrow-l">Prev</a></li>
-                <li><a href="#">01</a></li>
+                <li><a href="#">02</a></li>
+                <li><a href="#slide-03" data-icon="arrow-r">Next</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /footer -->
+</div>
+<div data-role="page" id="slide-03">
+    <div data-role="header" data-position="fixed">
+        <h2>slide 3</h2>
+        <a href="#slide-01" class="ui-btn-right" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+    </div>
+    <div data-role="content">
+
+    </div>
+    <div data-role="footer" data-position="fixed" data-id="fixedFooter">
+        <div data-role="navbar" data-iconpos="bottom">
+            <ul>
+                <li><a href="#slide-02" data-direction="reverse" data-icon="arrow-l">Prev</a></li>
+                <li><a href="#">03</a></li>
                 <li><a href="#" data-icon="arrow-r">Next</a></li>
             </ul>
         </div><!-- /navbar -->
     </div><!-- /footer -->
-
 </div>
+<script>
+    // Listen for any attempts to call changePage().
+    $(document).bind( "pagebeforechange", function( e, data ) {
+        console.log('before change ');
+        console.log(data);
+    });
+</script>
 </body>
 </html>
