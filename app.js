@@ -42,7 +42,7 @@ app.get('/api/album/list', function(req, res){
 
         setTimeout(function(){
             res.json(data);
-        }, 50);
+        }, 1000);
     });
 });
 

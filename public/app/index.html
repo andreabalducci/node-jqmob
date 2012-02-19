@@ -29,6 +29,7 @@
         <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
             <li data-role="list-divider">Snippet Pages</li>
             <li><a href="#" id="clickme">clickme</a></li>
+            <li><a href="#error" data-rel='dialog'>error</a></li>
         </ul>
     </div>
 
@@ -43,8 +44,18 @@
                 event.preventDefault();
 
                 $.mobile.showPageLoadingMsg();
+                var errorHandler = setTimeout(function(){
+                    errorHandler = null;
+                    $.mobile.hidePageLoadingMsg();
+                    $('#errorMessage').html('timeout di connessione');
+                    $.mobile.changePage('#error', 'pop', false, false);
+                }, 1000);
 
                 $.getJSON('/api/album/list?callback=?', {}, function (data) {
+                    if(errorHandler == null)    // messaggio a video
+                        return;
+                    clearTimeout(errorHandler);
+
                     var $page = $("<div data-role='page' id='about'></div>");
                     var $header = $("<div data-role='header'><h1>About</h1></div>");
                     var $content = $("<div data-role='content'></div>");
@@ -68,6 +79,10 @@
             });
         });
     </script>
+</div>
+<div data-role="dialog" id="error">
+    <div data-role="header"><h1>Errore</h1></div>
+    <div data-role="content"><span id="errorMessage">&nbsp;</span></div>
 </div>
 </body>
 </html>
