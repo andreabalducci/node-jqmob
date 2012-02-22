@@ -6,14 +6,13 @@
 var express = require('express')
   , routes = require('./routes');
 
-var MusicCatalogProvider = require('./MusicCatalogProvider').MusicCatalogProvider;
+var EventiProvider = require('./EventiProvider.js').EventiProvider;
 
-var provider = new MusicCatalogProvider();
+var provider = new EventiProvider();
 
 var app = module.exports = express.createServer();
 app.enable('jsonp callback');
 
-// Configuration
 //CORS middleware
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -22,6 +21,7 @@ var allowCrossDomain = function(req, res, next) {
     next();
 };
 
+// Configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -44,7 +44,7 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 
-app.get('/api/album/list', function(req, res){
+app.get('/api/eventi', function(req, res){
     provider.findAll(function(err, data){
         if(err) throw err;
 
@@ -54,7 +54,7 @@ app.get('/api/album/list', function(req, res){
     });
 });
 
-app.get('/api/album/:id', function(req, res){
+app.get('/api/eventi/:id', function(req, res){
     provider.findById(req.params.id, function(err, album){
         if(err) throw err;
         res.json(album);
