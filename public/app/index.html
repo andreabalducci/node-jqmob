@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title> Music store </title>
+    <title> Eventi Techbar </title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,20 +21,20 @@
 <div data-role="page">
 
     <div data-role="header">
-        <h1>Music store</h1>
+        <h1>Eventi</h1>
     </div>
 
     <div data-role="content">
 
         <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
-            <li data-role="list-divider">Snippet Pages</li>
-            <li><a href="#" id="clickme">clickme</a></li>
-            <li><a href="#error" data-rel='dialog'>error</a></li>
+            <li data-role="list-divider">Menu</li>
+            <li><a href="#" id="clickme">Visualizza</a></li>
+            <li><a href="#error" data-rel='dialog'>Errore</a></li>
         </ul>
     </div>
 
     <div data-role="footer">
-        <p>TechBar.it</p>
+        <h2>TechBar.it</h2>
     </div>
 
     <script>
@@ -44,26 +44,26 @@
                 event.preventDefault();
 
                 $.mobile.showPageLoadingMsg();
-                var errorHandler = setTimeout(function(){
+                var errorHandler = setTimeout(function () {
                     errorHandler = null;
                     $.mobile.hidePageLoadingMsg();
                     $('#errorMessage').html('timeout di connessione');
                     $.mobile.changePage('#error', 'pop', false, false);
                 }, 1000);
 
-                $.getJSON('/api/album/list?callback=?', {}, function (data) {
-                    if(errorHandler == null)    // messaggio a video
+                $.getJSON('/api/eventi/', {}, function (data) {
+                    if (errorHandler == null)    // messaggio a video
                         return;
                     clearTimeout(errorHandler);
 
                     var $page = $("<div data-role='page' id='about'></div>");
                     var $header = $("<div data-role='header'><h1>About</h1></div>");
                     var $content = $("<div data-role='content'></div>");
-                    var $footer = $("<div data-role='footer'>footer</div>");
+                    var $footer = $("<div data-role='footer'><h2>footer</h2></div>");
 
                     var $list = $("<ul data-role='listview'></ul>").appendTo($content);
-                    $.each(data, function(index, album){
-                        $list.append("<li><a href='#'>" + album.title +"</a></li>");
+                    $.each(data, function (index, evento) {
+                        $list.append("<li><a href='#'>" + evento.title + "</a></li>");
                     });
 
                     $page.append($header).append($content).append($footer).appendTo('#page-body');
@@ -76,6 +76,19 @@
                     //navigate to the new page
                     $.mobile.changePage("#about", "pop", false, true);
                 });
+            });
+
+            $('#add').bind('click', function (event) {
+                event.preventDefault();
+
+                $.post('/api/eventi/',
+                        {
+                            'title':'nuovo evento',
+                            'location':'qui'
+                        }, function (data, textStatus, jqXHR) {
+                            alert(data._id);
+                        }
+                );
             });
         });
     </script>
